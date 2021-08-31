@@ -1,0 +1,91 @@
+
+    .proj-grid {
+        content: "";
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        clear: both;
+      }
+  .proj-prev {
+    float: left;
+    width: 98%;
+    padding: 20px;
+
+    margin: 0.5rem;
+      border-radius: 0.4rem;
+      background: $colour-title;
+
+      &__image { 
+        text-align: center;
+        margin-top: 5%;
+        & img {
+            //position:relative;            
+            border-radius: 0.2rem;            
+            width: 40%;            
+        }   
+    }
+    &__heading {
+        padding-bottom: 0.4rem;
+        display :flex; 
+        justify-content:space-between;      
+        line-height: 0.5rem;
+    }
+    &__byline {
+        font-size: 1rem;        
+    }
+    &__bookmark {        
+        position:block;        
+        & img {          
+            left: 40%;
+            width: 70%;            
+        }        
+    }&:hover{
+        background:  $colour-title;
+        box-shadow: 2px 2px 2px 0.1px rgba(173, 173, 173, 0.9); 
+    }
+  }
+  
+
+
+  @media screen and (max-width: 600px) {
+    .proj-grid {
+        content: "";
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        //clear: both;
+      }
+    .proj-prev {
+      width: 100%;
+      margin: 0.5rem;
+      border-radius: 0.4rem;
+      background: $colour-title;
+
+      &__image { 
+        text-align: center;
+        margin-top: 5%;
+        & img {
+            //position:relative;            
+            border-radius: 0.2rem;            
+            width: 50%;            
+        }   
+    }
+    &__heading {
+        padding-bottom: 0.4rem;
+        display :flex; 
+        justify-content:space-between;      
+        line-height: 0.5rem;
+    }
+    &__byline {
+        font-size: 1rem;        
+    }
+    &__bookmark {        
+        position:block;        
+        & img {          
+            left: 40%;
+            width: 60%;            
+        }        
+    }&:hover{
+        background:  $colour-title;
+        box-shadow: 2px 2px 2px 0.1px rgba(173, 173, 173, 0.9); 
+    }
+    }
+}

@@ -1,0 +1,28 @@
+.form {
+    width: auto;
+    padding-bottom: $grid-gutter;
+    padding: 0.5rem;
+    &__field {
+        & label {
+            color: 000000;
+            font-size: 1rem;
+            line-height: 2rem;
+            padding-top: $grid-gutter;            
+        }
+        & input {
+            width: 100%;
+            background: $colour-primary;
+            color: $colour-secondary;
+            font-weight: 200;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            border-radius: 0.3rem;
+            background-color: $colour-title;
+            color: 000000;
+        }       
+    }
+    &__btn {
+       text-align: center;
+      
+    }
+}

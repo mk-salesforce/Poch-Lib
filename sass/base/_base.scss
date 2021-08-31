@@ -1,0 +1,75 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+@media all and (max-device-width: 480px)
+{
+    body {
+        box-sizing: border-box;
+        background: $colour-red;
+    }  
+}
+body {
+    box-sizing: border-box;
+    background: $colour-primary;
+}
+
+h2{
+    text-align:center;  
+}
+
+#DivBtn{
+    text-align: center;
+}
+#form_btn{
+    display: flex;
+    flex-direction:column;
+}
+
+#alert{
+    margin-right: 30%;
+    margin-left: 30%;  
+    margin-bottom: 0.2rem;  
+    background-color: #159e97;
+    color: white;
+    font-size: 1rem; 
+    text-align: center;
+    border-radius: 0.2rem;
+    line-height: 2rem;
+    
+}
+
+.addbook{ 
+    //margin-right: 0.5rem;
+    width: 1rem;          
+    &:hover{        
+        border-radius: 0.2rem;
+        background: $colour-border;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; 
+    }
+}
+
+.removebook{ 
+    margin-right: 0.5rem;
+    width: 1.2rem;        
+ &:hover{
+     border-radius: 0.2rem;
+     background: $colour-border;
+     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; 
+ }
+}
+.divlogo{
+    text-align: center;
+    
+    & img { 
+        
+        width: 10%;
+    }
+}
+
+
+
+

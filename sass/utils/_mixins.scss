@@ -1,0 +1,58 @@
+@mixin shadow($colour:lightness-shift($colour-accent), $offset: $heading-shadow-size){
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px; 
+}
+
+@mixin title {
+    @include shadow($colour-accent);
+    background: $colour-title;    
+    margin:0.5rem;
+    text-align: center;
+    border-radius: 0.3rem;  
+    display: frex;;
+    flex-direction: column;
+    
+    & img {         
+        width: 10%;
+    }  
+}
+
+@mixin btn {    
+    line-height:1rem;
+    padding: $grid-gutter;
+    margin-bottom: 1%;
+    @include border;
+    color: $colour-primary;
+    background: $colour-secondary;
+    cursor: pointer;
+
+    border-radius: 0.4rem;
+    @include shadow($colour-accent);
+    &:hover{
+        background: $colour-title;
+        color: $colour-secondary;
+    }
+    &--full-width {        
+        width: 10rem;
+        margin-top:1rem;   
+             
+    }
+    &--red-color{
+        background:  $colour-red ;
+    }
+}
+
+@mixin border($colour: $colour-border) {
+    @include shadow($colour-title);
+    border: .1rem solid $colour;
+}
+
+@mixin img-ratio {
+        width: 40%;
+        & img {            
+            position:relative;            
+            top: 50%;
+            left: 50%;
+            width: 100%;            
+        }
+}
+

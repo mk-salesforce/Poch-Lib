@@ -9,8 +9,7 @@
     text-align: center;
     border-radius: 0.3rem;  
     display: frex;;
-    flex-direction: column;
-    
+    flex-direction: column;    
     & img {         
         width: 10%;
     }  
@@ -24,17 +23,16 @@
     color: $colour-primary;
     background: $colour-secondary;
     cursor: pointer;
-
     border-radius: 0.4rem;
     @include shadow($colour-accent);
+
     &:hover{
         background: $colour-title;
         color: $colour-secondary;
     }
     &--full-width {        
         width: 10rem;
-        margin-top:1rem;   
-             
+        margin-top:1rem;            
     }
     &--red-color{
         background:  $colour-red ;

@@ -1,23 +1,19 @@
 
-import { ImageUndefined } from '/js/ImageUndefined.js';
-import  Store,{getBooks,addBook,removeBook} from '/js/Store.js';
+
+import {getBooks,addBook,removeBook} from '/js/Store.js';
 class UI{
     AjoutLogo(){
         const h1title = document.querySelector("h1");
         h1title.innerHTML = `
-        <img src="./images/logo.png" alt="logo" > `;
-       
+        <img src="./images/logo.png" alt="logo" > `;       
     }
     AjoutBtn(){
         const mybooks = document.getElementById("myBooks");
-        const Hr = document.querySelector("hr");      
-       
+        const Hr = document.querySelector("hr");
         const AjouterlivreBtn = document.createElement('div');
         AjouterlivreBtn.setAttribute("id","DivBtn");   
         AjouterlivreBtn.innerHTML = `
-        <button id="AjouterBtn" type="button" class="btn btn--full-width">Ajouter un livre</button>      
-        
-        `;       
+        <button id="AjouterBtn" type="button" class="btn btn--full-width">Ajouter un livre</button>`;       
         mybooks.insertBefore(AjouterlivreBtn,Hr);    
     } 
     AjoutForm(){
@@ -25,26 +21,22 @@ class UI{
         const Hr = document.querySelector("hr");    
 		const ajoutForm = document.createElement('div');
 		ajoutForm.setAttribute("id","formBook");
-		ajoutForm.innerHTML = `
-					
-        <form class="form">
-        
-        <div class="form__field">
-            <label class ="form__btn" >Titre du livre</label>
-            <input type="text"  id="titreLivre" >
-        </div>
-        <div class="form__field">
-            <label for="auteur">Auteur du livre</label>
-            <input type="text"  id="auteurlivre" >
-        </div>
-        <div id="form_btn">
-        <button type="submit" id="IdSearchBtn" class="IdSearchBtn btn btn--full-width">Rechercher</button>
-        <button type="submit" id="IdAnnulerBtn" class="btn btn--full-width  btn--red-color" onclick="window.location.replace('index.html')">Annuler</button>
-        </div>
-    </form>
-			
-		`;
-		
+		ajoutForm.innerHTML = `					
+        <form class="form">        
+            <div class="form__field">
+                <label class ="form__btn" >Titre du livre</label>
+                <input type="text"  id="titreLivre" >
+            </div>
+            <div class="form__field">
+                <label for="auteur">Auteur du livre</label>
+                <input type="text"  id="auteurlivre" >
+            </div>
+            <div id="form_btn">
+                <button type="submit" id="IdSearchBtn" class="IdSearchBtn btn btn--full-width">Rechercher</button>
+                <button type="submit" id="IdAnnulerBtn" class="btn btn--full-width  btn--red-color" onclick="window.location.reload()">Annuler</button>
+            </div>
+        </form>			
+		`;		
 		mybooks.insertBefore(ajoutForm,Hr);
         const searchBtn = document.getElementById("IdSearchBtn");
         console.log(searchBtn.innerHTML);
@@ -68,12 +60,9 @@ class UI{
     }
     
     ListBook(id){
-        const bookUrl = "https://www.googleapis.com/books/v1/volumes?q=" + id;
-        
-        return fetch(bookUrl)   
-          
-          .then((response) => {
-              
+        const bookUrl = "https://www.googleapis.com/books/v1/volumes?q=" + id;       
+        return fetch(bookUrl)          
+          .then((response) => {              
             if(response.ok) {           
               return response.json();
             } else {
@@ -152,19 +141,17 @@ class UI{
         }); 
     }
     SearchBook(titre,auteur){
-
-        if(titre == '' ){
-            ui.showAlert('Entrer un titre ');
+        if(titre === ''  || auteur === ''){
+            ui.showAlert('le titre et l\'auteur doivent être renseignés !');
         }else{
-        const bookUrl = "https://www.googleapis.com/books/v1/volumes?q=" + titre + auteur;        
+        const bookUrl = "https://www.googleapis.com/books/v1/volumes?q="+ titre + auteur;        
         return fetch(bookUrl)          
-          .then((response) => {              
+          .then((response) =>{              
             if(response.ok) {return response.json();} 
             else {throw new Error('Server response wasn\'t OK');}
           })
           .then((json) => {
-            const result = json.items;
-            
+            const result = json.items;            
             return result; 
           }) 
         }       
@@ -174,20 +161,23 @@ class UI{
     const Hr = document.querySelector("hr");
     const titleUi = document.getElementById('titreLivre').value;
     const authorUi = document.getElementById('auteurlivre').value;
-    const searchlist = document.createElement('div');
+    let searchlist = document.getElementById("idsearchlist");
+
+    if(searchlist !== null){
+        searchlist.innerHTML=``;
+    }else{
+        searchlist=document.createElement('div');
+    }
     const mybooks = document.getElementById('myBooks');     
     searchlist.setAttribute("class","proj-grid");
-    searchlist.setAttribute("id","idsearchlist");
+    searchlist.setAttribute("id","idsearchlist");   
    
-        
-    ui.SearchBook(titleUi,authorUi).then((result) =>{
-        
-        
+    ui.SearchBook(titleUi,authorUi).then((result) =>{ 
         var placeHldr = "/images/unavailable.png";
         for (var i = 0;i<result.length;i++){
             const item = result[i]; 
-            const titre = item.volumeInfo.title;
-            const auteur = (item.volumeInfo.authors) ? item.volumeInfo.authors[0] : "nom de l'auteur manquant";
+            const titre = item.volumeInfo.title.substring(0,30)+"...";
+            const auteur = (item.volumeInfo.authors) ? item.volumeInfo.authors[0] : "nom de l'auteur manquant !";
             const identifiant = item.volumeInfo.industryIdentifiers[0].identifier;
             const descript = (item.volumeInfo.description)?item.volumeInfo.description.substring(0,200)+"..." : "description manquante !";
             const imgbook = (item.volumeInfo.imageLinks) ? item.volumeInfo.imageLinks.thumbnail : placeHldr ;
@@ -196,27 +186,24 @@ class UI{
             const row = document.createElement('div');
             row.setAttribute("class","proj-prev");
             row.innerHTML = `               	
-                    <div class="proj-prev__heading ">                  
+                    <div class="proj-prev__heading">                  
                     <p id ="idtitre">titre : ${titre}</p>  
-                    <div > <img id ="${id}" class="addbook" src="./images/bookmark.png" alt="project title goes here" >  </div>              
+                    <div > <img id ="${id}" class="addbook" src="./images/bookmark.png" alt="bookmark addbook" ></div>              
                     </div> 
                         <div class="card-body">
                             <p id ="ididentifiant" class="proj-prev__byline">identifiant : ${identifiant}</p>
                             <p id = "idauteur" class="proj-prev__byline"> auteur : ${auteur}</p>
-                            <p id="iddescription" class="proj-prev__byline" >description : ${descript} </p>
+                            <p id="iddescription" class="proj-prev__byline" >description : ${descript}</p>
                             <div class = "proj-prev__image">
-                            <img  id = "idimg" src="${imgbook}" alt="project title goes here" >
+                            <img  id = "idimg" src="${imgbook}" alt="imgbook">
                             </div> 
                         </div>
             `;        
             searchlist.append(row);        
         }
         mybooks.insertBefore(searchlist,Hr);
-       ui.AddRemoveBook();
-      
-        
-    });
-     
+       ui.AddRemoveBook();        
+    });     
     document.getElementById('titreLivre').value= "";   
     document.getElementById('auteurlivre').value= "";   
    }
@@ -225,12 +212,9 @@ class UI{
         const content = document.getElementById('liendiv');
         const addBooks = document.querySelectorAll(".addbook");  
         addBooks.forEach((elem) => {
-        elem.addEventListener("click", (e) => {   
-          
+        elem.addEventListener("click",(e)=> {
             const storages = getBooks();
             const idbook = elem.getAttribute('id');
-             
-               
                 if(ui.checkExist(storages, idbook) === false) {
                     addBook(idbook);
                     ui.AddBookToList(idbook,content);    
@@ -238,9 +222,7 @@ class UI{
                 }else{
                     removeBook(idbook);  
                     ui.deleteBookDisplayBySearch(idbook);              
-                    ui.showAlert('Suppression avec succès');
-
-                    
+                    ui.showAlert('Suppression avec succès');                   
                 }            
             });
         });  
@@ -256,22 +238,17 @@ class UI{
         const container = document.getElementById('myBooks');
         const form = document.getElementById('DivBtn');
         container.insertBefore(div, form);
-        setTimeout(() => document.querySelector('#alert').remove(), 2000);
+        setTimeout(()=>document.querySelector('#alert').remove(),2000);
       }
 }
 
 const ui = new UI();
 
-// Event : Display Add book Button
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded',()=>{
     ui.AjoutLogo();
     ui.AjoutBtn();
     ui.AjoutForm();
     ui.ClickBtnAjtLvr();
-
-    ui.MybooksListDisplay();
-
-
-    
+    ui.MybooksListDisplay();   
 });
 

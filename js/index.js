@@ -1,6 +1,3 @@
-
-
-import {getBooks,addBook,removeBook} from '/js/Store.js';
 import UI from '/js/UI.js';
 
 

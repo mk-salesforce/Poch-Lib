@@ -7,9 +7,8 @@ export function getBooks() {
     if(localStorage.getItem('books') === null) {
       books = [];
     } else {
-      books = JSON.parse(localStorage.getItem('books'));
-    }
-    return books;
+      return JSON.parse(localStorage.getItem('books'));
+    }    
   }
 
 export function addBook(book) {

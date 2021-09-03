@@ -23,4 +23,5 @@ https://www.npmjs.com/package/http-server
 
 
 ### Exécution de l'application 
-Après avoir téléchargé l'application, il faudra se placer à la racine de l'application et éxecuter la commande suivante : npm run start
+Après avoir téléchargé l'application, il faudra se placer à la racine de l'application et éxecuter la commande suivante : 
+`npm run start`

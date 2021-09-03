@@ -8,8 +8,8 @@ Ces instructions vous permettront d'obtenir une copie du projet opérationnel su
 
 De quoi avez-vous besoin pour démarrer l'application et comment les installer
 
--Node.js 16.6.2
--Http-server 13.0.1
+- Node.js 16.6.2
+- Http-server 13.0.1
 
 ### Installation
 
